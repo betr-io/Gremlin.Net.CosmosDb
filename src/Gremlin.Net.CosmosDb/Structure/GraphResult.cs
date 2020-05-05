@@ -53,11 +53,21 @@ namespace Gremlin.Net.CosmosDb.Structure
         /// </summary>
         public double TotalRequestCharge => (double)ResultSet.StatusAttributes["x-ms-total-request-charge"];
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GraphResult"/> class.
+        /// </summary>
+        /// <param name="resultSet">The result set.</param>
         public GraphResult(ResultSet<JToken> resultSet)
         {
             ResultSet = resultSet ?? throw new System.ArgumentNullException(nameof(resultSet));
         }
 
+        /// <summary>
+        /// Apply typed deserialized data to this <see cref="GraphResult{T}"/>.
+        /// </summary>
+        /// <param name="serializer">The serializer</param>
+        /// <typeparam name="T">The type to deserialize as.</typeparam>
+        /// <returns>The typed <see cref="GraphResult{T}"/>.</returns>
         public GraphResult<T> ApplyType<T>(JsonSerializer serializer)
         {
             return new GraphResult<T>(ResultSet, serializer);

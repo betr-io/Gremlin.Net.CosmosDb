@@ -26,6 +26,8 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="databaseName">Name of the database (case-sensitive).</param>
         /// <param name="graphName">Name of the graph.</param>
         /// <param name="accessKey">The access key.</param>
+        /// <param name="port">The port number.</param>
+        /// <param name="useSSL"><c>True</c> to use SSL.</param>
         public GraphClient(string gremlinHostname, string databaseName, string graphName, string accessKey,
             int port = 443, bool useSSL = true)
         {
@@ -66,6 +68,9 @@ namespace Gremlin.Net.CosmosDb
         /// </summary>
         /// <param name="gremlinQuery">The gremlin query.</param>
         /// <returns>Returns the results</returns>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <exception cref="ArgumentNullException">gremlinQuery</exception>
         public async Task<GraphResult> QueryAsync(
             string gremlinQuery,

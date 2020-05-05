@@ -20,6 +20,9 @@ namespace Gremlin.Net.CosmosDb
         /// Submits the given gremlin query to the Cosmos Db instance and returns the results.
         /// </summary>
         /// <param name="gremlinQuery">The gremlin query.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the results</returns>
         Task<GraphResult> QueryAsync(
             string gremlinQuery,

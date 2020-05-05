@@ -23,6 +23,9 @@ namespace Gremlin.Net.CosmosDb
         /// </summary>
         /// <param name="graphClient">The graph client.</param>
         /// <param name="gremlinQuery">The traversal query.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static Task ExecuteAsync(this IGraphClient graphClient, string gremlinQuery, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
@@ -34,6 +37,9 @@ namespace Gremlin.Net.CosmosDb
         /// </summary>
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static Task ExecuteAsync(this IGraphClient graphClient, ITraversal traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
@@ -50,6 +56,9 @@ namespace Gremlin.Net.CosmosDb
         /// <typeparam name="T"></typeparam>
         /// <param name="graphClient">The graph client.</param>
         /// <param name="gremlinQuery">The traversal query.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static Task<GraphResult<T>> QueryAsync<T>(this IGraphClient graphClient, string gremlinQuery, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -63,6 +72,9 @@ namespace Gremlin.Net.CosmosDb
         /// <typeparam name="T"></typeparam>
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static Task<GraphResult<T>> QueryAsync<T>(this IGraphClient graphClient, ITraversal traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -77,6 +89,9 @@ namespace Gremlin.Net.CosmosDb
         /// <typeparam name="E"></typeparam>
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static Task<GraphResult<E>> QueryAsync<S, E>(this IGraphClient graphClient, ITraversal<S, E> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -91,6 +106,9 @@ namespace Gremlin.Net.CosmosDb
         /// <typeparam name="E"></typeparam>
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static Task<GraphResult<E>> QueryAsync<S, E>(this IGraphClient graphClient, ISchemaBoundTraversal<S, E> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -104,6 +122,9 @@ namespace Gremlin.Net.CosmosDb
         /// <typeparam name="S"></typeparam>
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static Task<GraphResult<Vertex>> QueryAsync<S>(this IGraphClient graphClient, ITraversal<S, Gremlin.Net.Structure.Vertex> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -117,6 +138,9 @@ namespace Gremlin.Net.CosmosDb
         /// <typeparam name="S"></typeparam>
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static Task<GraphResult<Edge>> QueryAsync<S>(this IGraphClient graphClient, ITraversal<S, Gremlin.Net.Structure.Edge> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -130,6 +154,9 @@ namespace Gremlin.Net.CosmosDb
         /// <typeparam name="S"></typeparam>
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static Task<GraphResult<Property>> QueryAsync<S>(this IGraphClient graphClient, ITraversal<S, Gremlin.Net.Structure.Property> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -144,6 +171,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="graphClient">The graph client.</param>
         /// <param name="gremlinQuery">The traversal query.</param>
         /// <param name="serializerSettings">The serializer settings.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static async Task<GraphResult<T>> QueryAsync<T>(this IGraphClient graphClient, string gremlinQuery, JsonSerializerSettings serializerSettings, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -162,6 +192,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
         /// <param name="serializerSettings">The serializer settings.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static Task<GraphResult<E>> QueryAsync<S, E>(this IGraphClient graphClient, ITraversal<S, E> traversal, JsonSerializerSettings serializerSettings, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -177,6 +210,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
         /// <param name="serializerSettings">The serializer settings.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static Task<GraphResult<E>> QueryAsync<S, E>(this IGraphClient graphClient, ISchemaBoundTraversal<S, E> traversal, JsonSerializerSettings serializerSettings, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -191,6 +227,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
         /// <param name="serializerSettings">The serializer settings.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static Task<GraphResult<T>> QueryAsync<T>(this IGraphClient graphClient, ITraversal traversal, JsonSerializerSettings serializerSettings, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -238,6 +277,9 @@ namespace Gremlin.Net.CosmosDb
         /// <typeparam name="T"></typeparam>
         /// <param name="graphClient">The graph client.</param>
         /// <param name="gremlinQuery">The traversal query.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static async Task<T> QueryFirstAsync<T>(this IGraphClient graphClient, string gremlinQuery, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -252,6 +294,9 @@ namespace Gremlin.Net.CosmosDb
         /// <typeparam name="T"></typeparam>
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static async Task<T> QueryFirstAsync<T>(this IGraphClient graphClient, ITraversal traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -267,6 +312,9 @@ namespace Gremlin.Net.CosmosDb
         /// <typeparam name="E"></typeparam>
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static async Task<E> QueryFirstAsync<S, E>(this IGraphClient graphClient, ITraversal<S, E> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -282,6 +330,9 @@ namespace Gremlin.Net.CosmosDb
         /// <typeparam name="E"></typeparam>
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static async Task<E> QueryFirstAsync<S, E>(this IGraphClient graphClient, ISchemaBoundTraversal<S, E> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -296,6 +347,9 @@ namespace Gremlin.Net.CosmosDb
         /// <typeparam name="S"></typeparam>
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static async Task<Vertex> QueryFirstAsync<S>(this IGraphClient graphClient, ITraversal<S, Gremlin.Net.Structure.Vertex> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -310,6 +364,9 @@ namespace Gremlin.Net.CosmosDb
         /// <typeparam name="S"></typeparam>
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static async Task<Edge> QueryFirstAsync<S>(this IGraphClient graphClient, ITraversal<S, Gremlin.Net.Structure.Edge> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -324,6 +381,9 @@ namespace Gremlin.Net.CosmosDb
         /// <typeparam name="S"></typeparam>
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static async Task<Property> QueryFirstAsync<S>(this IGraphClient graphClient, ITraversal<S, Gremlin.Net.Structure.Property> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -339,6 +399,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="graphClient">The graph client.</param>
         /// <param name="gremlinQuery">The traversal query.</param>
         /// <param name="serializerSettings">The serializer settings.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static async Task<T> QueryFirstAsync<T>(this IGraphClient graphClient, string gremlinQuery, JsonSerializerSettings serializerSettings, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -355,6 +418,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
         /// <param name="serializerSettings">The serializer settings.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static async Task<E> QueryFirstAsync<S, E>(this IGraphClient graphClient, ITraversal<S, E> traversal, JsonSerializerSettings serializerSettings, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -371,6 +437,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
         /// <param name="serializerSettings">The serializer settings.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static async Task<E> QueryFirstAsync<S, E>(this IGraphClient graphClient, ISchemaBoundTraversal<S, E> traversal, JsonSerializerSettings serializerSettings, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -386,6 +455,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
         /// <param name="serializerSettings">The serializer settings.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static async Task<T> QueryFirstAsync<T>(this IGraphClient graphClient, ITraversal traversal, JsonSerializerSettings serializerSettings, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -404,6 +476,9 @@ namespace Gremlin.Net.CosmosDb
         /// <typeparam name="T"></typeparam>
         /// <param name="graphClient">The graph client.</param>
         /// <param name="gremlinQuery">The traversal query.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static async Task<T> QueryFirstOrDefaultAsync<T>(this IGraphClient graphClient, string gremlinQuery, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -418,6 +493,9 @@ namespace Gremlin.Net.CosmosDb
         /// <typeparam name="T"></typeparam>
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static async Task<T> QueryFirstOrDefaultAsync<T>(this IGraphClient graphClient, ITraversal traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -433,6 +511,9 @@ namespace Gremlin.Net.CosmosDb
         /// <typeparam name="E"></typeparam>
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static async Task<E> QueryFirstOrDefaultAsync<S, E>(this IGraphClient graphClient, ITraversal<S, E> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -448,6 +529,9 @@ namespace Gremlin.Net.CosmosDb
         /// <typeparam name="E"></typeparam>
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static async Task<E> QueryFirstOrDefaultAsync<S, E>(this IGraphClient graphClient, ISchemaBoundTraversal<S, E> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -462,6 +546,9 @@ namespace Gremlin.Net.CosmosDb
         /// <typeparam name="S"></typeparam>
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static async Task<Vertex> QueryFirstOrDefaultAsync<S>(this IGraphClient graphClient, ITraversal<S, Gremlin.Net.Structure.Vertex> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -476,6 +563,9 @@ namespace Gremlin.Net.CosmosDb
         /// <typeparam name="S"></typeparam>
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static async Task<Edge> QueryFirstOrDefaultAsync<S>(this IGraphClient graphClient, ITraversal<S, Gremlin.Net.Structure.Edge> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -490,6 +580,9 @@ namespace Gremlin.Net.CosmosDb
         /// <typeparam name="S"></typeparam>
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static async Task<Property> QueryFirstOrDefaultAsync<S>(this IGraphClient graphClient, ITraversal<S, Gremlin.Net.Structure.Property> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -505,6 +598,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="graphClient">The graph client.</param>
         /// <param name="gremlinQuery">The traversal query.</param>
         /// <param name="serializerSettings">The serializer settings.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static async Task<T> QueryFirstOrDefaultAsync<T>(this IGraphClient graphClient, string gremlinQuery, JsonSerializerSettings serializerSettings, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -521,6 +617,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
         /// <param name="serializerSettings">The serializer settings.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static async Task<E> QueryFirstOrDefaultAsync<S, E>(this IGraphClient graphClient, ITraversal<S, E> traversal, JsonSerializerSettings serializerSettings, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -537,6 +636,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
         /// <param name="serializerSettings">The serializer settings.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static async Task<E> QueryFirstOrDefaultAsync<S, E>(this IGraphClient graphClient, ISchemaBoundTraversal<S, E> traversal, JsonSerializerSettings serializerSettings, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -552,6 +654,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
         /// <param name="serializerSettings">The serializer settings.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static async Task<T> QueryFirstOrDefaultAsync<T>(this IGraphClient graphClient, ITraversal traversal, JsonSerializerSettings serializerSettings, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -569,6 +674,9 @@ namespace Gremlin.Net.CosmosDb
         /// <typeparam name="T"></typeparam>
         /// <param name="graphClient">The graph client.</param>
         /// <param name="gremlinQuery">The traversal query.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static async Task<T> QuerySingleAsync<T>(this IGraphClient graphClient, string gremlinQuery, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -583,6 +691,9 @@ namespace Gremlin.Net.CosmosDb
         /// <typeparam name="T"></typeparam>
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static async Task<T> QuerySingleAsync<T>(this IGraphClient graphClient, ITraversal traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -598,6 +709,9 @@ namespace Gremlin.Net.CosmosDb
         /// <typeparam name="E"></typeparam>
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static async Task<E> QuerySingleAsync<S, E>(this IGraphClient graphClient, ITraversal<S, E> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -613,6 +727,9 @@ namespace Gremlin.Net.CosmosDb
         /// <typeparam name="E"></typeparam>
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static async Task<E> QuerySingleAsync<S, E>(this IGraphClient graphClient, ISchemaBoundTraversal<S, E> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -627,6 +744,9 @@ namespace Gremlin.Net.CosmosDb
         /// <typeparam name="S"></typeparam>
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static async Task<Vertex> QuerySingleAsync<S>(this IGraphClient graphClient, ITraversal<S, Gremlin.Net.Structure.Vertex> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -641,6 +761,9 @@ namespace Gremlin.Net.CosmosDb
         /// <typeparam name="S"></typeparam>
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static async Task<Edge> QuerySingleAsync<S>(this IGraphClient graphClient, ITraversal<S, Gremlin.Net.Structure.Edge> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -655,6 +778,9 @@ namespace Gremlin.Net.CosmosDb
         /// <typeparam name="S"></typeparam>
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static async Task<Property> QuerySingleAsync<S>(this IGraphClient graphClient, ITraversal<S, Gremlin.Net.Structure.Property> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -670,6 +796,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="graphClient">The graph client.</param>
         /// <param name="gremlinQuery">The traversal query.</param>
         /// <param name="serializerSettings">The serializer settings.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static async Task<T> QuerySingleAsync<T>(this IGraphClient graphClient, string gremlinQuery, JsonSerializerSettings serializerSettings, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -686,6 +815,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
         /// <param name="serializerSettings">The serializer settings.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static async Task<E> QuerySingleAsync<S, E>(this IGraphClient graphClient, ITraversal<S, E> traversal, JsonSerializerSettings serializerSettings, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -702,6 +834,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
         /// <param name="serializerSettings">The serializer settings.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static async Task<E> QuerySingleAsync<S, E>(this IGraphClient graphClient, ISchemaBoundTraversal<S, E> traversal, JsonSerializerSettings serializerSettings, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -717,6 +852,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
         /// <param name="serializerSettings">The serializer settings.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static async Task<T> QuerySingleAsync<T>(this IGraphClient graphClient, ITraversal traversal, JsonSerializerSettings serializerSettings, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -735,6 +873,9 @@ namespace Gremlin.Net.CosmosDb
         /// <typeparam name="T"></typeparam>
         /// <param name="graphClient">The graph client.</param>
         /// <param name="gremlinQuery">The traversal query.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static async Task<T> QuerySingleOrDefaultAsync<T>(this IGraphClient graphClient, string gremlinQuery, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -749,6 +890,9 @@ namespace Gremlin.Net.CosmosDb
         /// <typeparam name="T"></typeparam>
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static async Task<T> QuerySingleOrDefaultAsync<T>(this IGraphClient graphClient, ITraversal traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -764,6 +908,9 @@ namespace Gremlin.Net.CosmosDb
         /// <typeparam name="E"></typeparam>
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static async Task<E> QuerySingleOrDefaultAsync<S, E>(this IGraphClient graphClient, ITraversal<S, E> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -779,6 +926,9 @@ namespace Gremlin.Net.CosmosDb
         /// <typeparam name="E"></typeparam>
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static async Task<E> QuerySingleOrDefaultAsync<S, E>(this IGraphClient graphClient, ISchemaBoundTraversal<S, E> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -793,6 +943,9 @@ namespace Gremlin.Net.CosmosDb
         /// <typeparam name="S"></typeparam>
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static async Task<Vertex> QuerySingleOrDefaultAsync<S>(this IGraphClient graphClient, ITraversal<S, Gremlin.Net.Structure.Vertex> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -807,6 +960,9 @@ namespace Gremlin.Net.CosmosDb
         /// <typeparam name="S"></typeparam>
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static async Task<Edge> QuerySingleOrDefaultAsync<S>(this IGraphClient graphClient, ITraversal<S, Gremlin.Net.Structure.Edge> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -821,6 +977,9 @@ namespace Gremlin.Net.CosmosDb
         /// <typeparam name="S"></typeparam>
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static async Task<Property> QuerySingleOrDefaultAsync<S>(this IGraphClient graphClient, ITraversal<S, Gremlin.Net.Structure.Property> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -836,6 +995,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="graphClient">The graph client.</param>
         /// <param name="gremlinQuery">The traversal query.</param>
         /// <param name="serializerSettings">The serializer settings.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static async Task<T> QuerySingleOrDefaultAsync<T>(this IGraphClient graphClient, string gremlinQuery, JsonSerializerSettings serializerSettings, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -852,6 +1014,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
         /// <param name="serializerSettings">The serializer settings.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static async Task<E> QuerySingleOrDefaultAsync<S, E>(this IGraphClient graphClient, ITraversal<S, E> traversal, JsonSerializerSettings serializerSettings, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -868,6 +1033,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
         /// <param name="serializerSettings">The serializer settings.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static async Task<E> QuerySingleOrDefaultAsync<S, E>(this IGraphClient graphClient, ISchemaBoundTraversal<S, E> traversal, JsonSerializerSettings serializerSettings, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
@@ -883,6 +1051,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
         /// <param name="serializerSettings">The serializer settings.</param>
+        /// <param name="caller">Method name or property name of the caller.</param>
+        /// <param name="filePath">Full path of the source file that contains the caller. The full path is the path at compile time.</param>
+        /// <param name="sourceLineNumber">Line number in the source file from which the method is called.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
         public static async Task<T> QuerySingleOrDefaultAsync<T>(this IGraphClient graphClient, ITraversal traversal, JsonSerializerSettings serializerSettings, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
