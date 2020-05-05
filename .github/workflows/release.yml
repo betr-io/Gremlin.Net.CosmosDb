@@ -1,0 +1,46 @@
+name: Publish NuGet packages
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    runs-on: ubuntu-18.04
+    env:
+      DOTNET_CLI_TELEMETRY_OPTOUT: 1
+
+    steps:
+      - name: Print GitHub Context # Debug step
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.101
+
+      - name: Disable .Net Welcome
+        run: touch "$HOME/.dotnet/$(dotnet --version).dotnetFirstUseSentinel"
+
+      - name: Download Nuget release package
+        uses: wyozi/download-gh-release-asset@master
+        with:
+          args: ${{ github.event.release.assets[0].name }}
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Download Nuget release symbol package
+        uses: wyozi/download-gh-release-asset@master
+        with:
+          args: ${{ github.event.release.assets[1].name }}
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Push packages to nuget.org
+        run: dotnet nuget push Betr.Gremlin.Net.CosmosDb.*.*nupkg
+              --api-key ${{ secrets.NUGET_DEPLOY_KEY }}
+              --source https://api.nuget.org/v3/index.json
+              --skip-duplicate
+

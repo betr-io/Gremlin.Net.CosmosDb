@@ -3,18 +3,49 @@ name: CI
 on:
   push:
     branches: [master]
+    tags:
+      - 'v*'  # Push events to matching v*, i.e. v1.0, v20.15.10
   pull_request:
     branches: [master]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     env:
       DOTNET_CLI_TELEMETRY_OPTOUT: 1
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.ref }}
+          fetch-depth: 0
 
+      - name: Fetch base branch
+        run: git fetch --no-tags origin +refs/heads/${{ github.base_ref }}:refs/remotes/origin/${{ github.base_ref }}
+        if: github.ref != 'refs/heads/master' && !startsWith(github.ref, 'refs/tags/')
+
+      - name: Fetch master branch
+        run: git fetch --no-tags origin +refs/heads/${{ github.event.repository.master_branch }}:refs/remotes/origin/${{ github.event.repository.master_branch }}
+        if: startsWith(github.ref, 'refs/tags/')
+
+      - name: Fetch tags
+        run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+        if: ${{ !startsWith(github.ref, 'refs/tags/') }}
+
+      - name: Run GitVersion
+        uses: docker://gittools/gitversion:5.3.2-linux-ubuntu.18.04-x64-netcoreapp3.1
+        with:
+          args: -output buildserver -nocache
+
+      - name: Print GitHub Context # Debug step
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+          ENV_CONTEXT: ${{ toJson(env) }}
+        run: echo -e "GITHUB\n$GITHUB_CONTEXT\n\nENV\n$ENV_CONTEXT"
+
+      # Optional step, add only for a specific dotnet version that doesn't come with ubuntu-latest / windows-latest
+      # Visit bit.ly/2synnZl for a list of software that comes pre-installed with ubuntu-latest / windows-latest
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
         with:
@@ -23,8 +54,49 @@ jobs:
       - name: Disable .Net Welcome
         run: touch "$HOME/.dotnet/$(dotnet --version).dotnetFirstUseSentinel"
 
-      - name: Build with dotnet
+      - name: Build
         run: dotnet build --configuration Release
 
       - name: Test
-        run: dotnet test --configuration Release
+        run: dotnet test --configuration Release --no-build
+
+      - name: Pack NuGet packages
+        if: startsWith(github.ref, 'refs/tags/')
+        run: dotnet pack --configuration Release -p:Company=Betr -p:PackageId=Betr.Gremlin.Net.CosmosDb -p:PackageProjectUrl=${{ github.event.repository.html_url }} -p:RepositoryUrl=${{ github.event.repository.html_url }}
+        working-directory: ./src/Gremlin.Net.CosmosDb
+
+      - name: Create Release
+        id: create_release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: actions/create-release@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Release notes.
+          draft: true
+          prerelease: ${{ env.GitVersion_PreReleaseTag != '' }}
+
+      - name: Upload Release Nuget package
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          asset_path: ./src/Gremlin.Net.CosmosDb/bin/Release/Betr.Gremlin.Net.CosmosDb.${{ env.GitVersion_SemVer }}.nupkg
+          asset_name: Betr.Gremlin.Net.CosmosDb.${{ env.GitVersion_SemVer }}.nupkg
+          asset_content_type: application/zip
+
+      - name: Upload Release Nuget symbol package
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          asset_path: ./src/Gremlin.Net.CosmosDb/bin/Release/Betr.Gremlin.Net.CosmosDb.${{ env.GitVersion_SemVer }}.snupkg
+          asset_name: Betr.Gremlin.Net.CosmosDb.${{ env.GitVersion_SemVer }}.snupkg
+          asset_content_type: application/zip
