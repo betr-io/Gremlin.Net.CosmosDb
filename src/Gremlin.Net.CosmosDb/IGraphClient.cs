@@ -1,5 +1,6 @@
 ﻿using Gremlin.Net.CosmosDb.Structure;
 using System;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace Gremlin.Net.CosmosDb
@@ -20,7 +21,11 @@ namespace Gremlin.Net.CosmosDb
         /// </summary>
         /// <param name="gremlinQuery">The gremlin query.</param>
         /// <returns>Returns the results</returns>
-        Task<GraphResult> QueryAsync(string gremlinQuery);
+        Task<GraphResult> QueryAsync(
+            string gremlinQuery,
+            [CallerMemberName] string caller = "",
+            [CallerFilePath] string filePath = "",
+            [CallerLineNumber] int sourceLineNumber = 0);
 
         /// <summary>
         /// Submits the given gremlin query to the Cosmos Db instance.

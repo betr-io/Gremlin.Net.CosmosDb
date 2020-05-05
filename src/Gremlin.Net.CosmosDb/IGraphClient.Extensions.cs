@@ -6,6 +6,7 @@ using Newtonsoft.Json.Converters;
 using System;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace Gremlin.Net.CosmosDb
@@ -23,9 +24,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="graphClient">The graph client.</param>
         /// <param name="gremlinQuery">The traversal query.</param>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static Task ExecuteAsync(this IGraphClient graphClient, string gremlinQuery)
+        public static Task ExecuteAsync(this IGraphClient graphClient, string gremlinQuery, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return graphClient.QueryAsync(gremlinQuery);
+            return graphClient.QueryAsync(gremlinQuery, caller, filePath, sourceLineNumber);
         }
 
         /// <summary>
@@ -34,9 +35,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="graphClient">The graph client.</param>
         /// <param name="traversal">The traversal.</param>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static Task ExecuteAsync(this IGraphClient graphClient, ITraversal traversal)
+        public static Task ExecuteAsync(this IGraphClient graphClient, ITraversal traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return graphClient.QueryAsync<object>(traversal);
+            return graphClient.QueryAsync<object>(traversal, caller, filePath, sourceLineNumber);
         }
 
         #endregion ExecuteAsync
@@ -51,9 +52,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="gremlinQuery">The traversal query.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static Task<GraphResult<T>> QueryAsync<T>(this IGraphClient graphClient, string gremlinQuery)
+        public static Task<GraphResult<T>> QueryAsync<T>(this IGraphClient graphClient, string gremlinQuery, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return graphClient.QueryAsync<T>(gremlinQuery, BuildDefaultSerializerSettings());
+            return graphClient.QueryAsync<T>(gremlinQuery, BuildDefaultSerializerSettings(), caller, filePath, sourceLineNumber);
         }
 
         /// <summary>
@@ -64,9 +65,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="traversal">The traversal.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static Task<GraphResult<T>> QueryAsync<T>(this IGraphClient graphClient, ITraversal traversal)
+        public static Task<GraphResult<T>> QueryAsync<T>(this IGraphClient graphClient, ITraversal traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return graphClient.QueryAsync<T>(traversal, BuildDefaultSerializerSettings());
+            return graphClient.QueryAsync<T>(traversal, BuildDefaultSerializerSettings(), caller, filePath, sourceLineNumber);
         }
 
         /// <summary>
@@ -78,9 +79,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="traversal">The traversal.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static Task<GraphResult<E>> QueryAsync<S, E>(this IGraphClient graphClient, ITraversal<S, E> traversal)
+        public static Task<GraphResult<E>> QueryAsync<S, E>(this IGraphClient graphClient, ITraversal<S, E> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return graphClient.QueryAsync(traversal, BuildDefaultSerializerSettings());
+            return graphClient.QueryAsync(traversal, BuildDefaultSerializerSettings(), caller, filePath, sourceLineNumber);
         }
 
         /// <summary>
@@ -92,9 +93,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="traversal">The traversal.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static Task<GraphResult<E>> QueryAsync<S, E>(this IGraphClient graphClient, ISchemaBoundTraversal<S, E> traversal)
+        public static Task<GraphResult<E>> QueryAsync<S, E>(this IGraphClient graphClient, ISchemaBoundTraversal<S, E> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return graphClient.QueryAsync(traversal, BuildDefaultSerializerSettings());
+            return graphClient.QueryAsync(traversal, BuildDefaultSerializerSettings(), caller, filePath, sourceLineNumber);
         }
 
         /// <summary>
@@ -105,9 +106,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="traversal">The traversal.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static Task<GraphResult<Vertex>> QueryAsync<S>(this IGraphClient graphClient, ITraversal<S, Gremlin.Net.Structure.Vertex> traversal)
+        public static Task<GraphResult<Vertex>> QueryAsync<S>(this IGraphClient graphClient, ITraversal<S, Gremlin.Net.Structure.Vertex> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return graphClient.QueryAsync<Vertex>(traversal);
+            return graphClient.QueryAsync<Vertex>(traversal, caller, filePath, sourceLineNumber);
         }
 
         /// <summary>
@@ -118,9 +119,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="traversal">The traversal.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static Task<GraphResult<Edge>> QueryAsync<S>(this IGraphClient graphClient, ITraversal<S, Gremlin.Net.Structure.Edge> traversal)
+        public static Task<GraphResult<Edge>> QueryAsync<S>(this IGraphClient graphClient, ITraversal<S, Gremlin.Net.Structure.Edge> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return graphClient.QueryAsync<Edge>(traversal);
+            return graphClient.QueryAsync<Edge>(traversal, caller, filePath, sourceLineNumber);
         }
 
         /// <summary>
@@ -131,9 +132,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="traversal">The traversal.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static Task<GraphResult<Property>> QueryAsync<S>(this IGraphClient graphClient, ITraversal<S, Gremlin.Net.Structure.Property> traversal)
+        public static Task<GraphResult<Property>> QueryAsync<S>(this IGraphClient graphClient, ITraversal<S, Gremlin.Net.Structure.Property> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return graphClient.QueryAsync<Property>(traversal);
+            return graphClient.QueryAsync<Property>(traversal, caller, filePath, sourceLineNumber);
         }
 
         /// <summary>
@@ -145,9 +146,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="serializerSettings">The serializer settings.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static async Task<GraphResult<T>> QueryAsync<T>(this IGraphClient graphClient, string gremlinQuery, JsonSerializerSettings serializerSettings)
+        public static async Task<GraphResult<T>> QueryAsync<T>(this IGraphClient graphClient, string gremlinQuery, JsonSerializerSettings serializerSettings, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            var result = await graphClient.QueryAsync(gremlinQuery);
+            var result = await graphClient.QueryAsync(gremlinQuery, caller, filePath, sourceLineNumber);
             var serializer = JsonSerializer.Create(serializerSettings);
 
             return result.ApplyType<T>(serializer);
@@ -163,9 +164,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="serializerSettings">The serializer settings.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static Task<GraphResult<E>> QueryAsync<S, E>(this IGraphClient graphClient, ITraversal<S, E> traversal, JsonSerializerSettings serializerSettings)
+        public static Task<GraphResult<E>> QueryAsync<S, E>(this IGraphClient graphClient, ITraversal<S, E> traversal, JsonSerializerSettings serializerSettings, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return graphClient.QueryAsync<E>(traversal, serializerSettings);
+            return graphClient.QueryAsync<E>(traversal, serializerSettings, caller, filePath, sourceLineNumber);
         }
 
         /// <summary>
@@ -178,9 +179,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="serializerSettings">The serializer settings.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static Task<GraphResult<E>> QueryAsync<S, E>(this IGraphClient graphClient, ISchemaBoundTraversal<S, E> traversal, JsonSerializerSettings serializerSettings)
+        public static Task<GraphResult<E>> QueryAsync<S, E>(this IGraphClient graphClient, ISchemaBoundTraversal<S, E> traversal, JsonSerializerSettings serializerSettings, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return graphClient.QueryAsync<E>(traversal.AsGraphTraversal(), serializerSettings);
+            return graphClient.QueryAsync<E>(traversal.AsGraphTraversal(), serializerSettings, caller, filePath, sourceLineNumber);
         }
 
         /// <summary>
@@ -192,14 +193,14 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="serializerSettings">The serializer settings.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static Task<GraphResult<T>> QueryAsync<T>(this IGraphClient graphClient, ITraversal traversal, JsonSerializerSettings serializerSettings)
+        public static Task<GraphResult<T>> QueryAsync<T>(this IGraphClient graphClient, ITraversal traversal, JsonSerializerSettings serializerSettings, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
             if (traversal == null)
                 throw new ArgumentNullException(nameof(traversal));
 
             var gremlinQuery = traversal.ToGremlinQuery();
 
-            return graphClient.QueryAsync<T>(gremlinQuery, serializerSettings);
+            return graphClient.QueryAsync<T>(gremlinQuery, serializerSettings, caller, filePath, sourceLineNumber);
         }
 
         /// <summary>
@@ -239,9 +240,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="gremlinQuery">The traversal query.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static async Task<T> QueryFirstAsync<T>(this IGraphClient graphClient, string gremlinQuery)
+        public static async Task<T> QueryFirstAsync<T>(this IGraphClient graphClient, string gremlinQuery, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return (await graphClient.QueryAsync<T>(gremlinQuery)).First();
+            return (await graphClient.QueryAsync<T>(gremlinQuery, caller, filePath, sourceLineNumber)).First();
         }
 
         /// <summary>
@@ -253,9 +254,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="traversal">The traversal.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static async Task<T> QueryFirstAsync<T>(this IGraphClient graphClient, ITraversal traversal)
+        public static async Task<T> QueryFirstAsync<T>(this IGraphClient graphClient, ITraversal traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return (await graphClient.QueryAsync<T>(traversal)).First();
+            return (await graphClient.QueryAsync<T>(traversal, caller, filePath, sourceLineNumber)).First();
         }
 
         /// <summary>
@@ -268,9 +269,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="traversal">The traversal.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static async Task<E> QueryFirstAsync<S, E>(this IGraphClient graphClient, ITraversal<S, E> traversal)
+        public static async Task<E> QueryFirstAsync<S, E>(this IGraphClient graphClient, ITraversal<S, E> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return (await graphClient.QueryAsync(traversal)).First();
+            return (await graphClient.QueryAsync(traversal, caller, filePath, sourceLineNumber)).First();
         }
 
         /// <summary>
@@ -283,9 +284,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="traversal">The traversal.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static async Task<E> QueryFirstAsync<S, E>(this IGraphClient graphClient, ISchemaBoundTraversal<S, E> traversal)
+        public static async Task<E> QueryFirstAsync<S, E>(this IGraphClient graphClient, ISchemaBoundTraversal<S, E> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return (await graphClient.QueryAsync(traversal)).First();
+            return (await graphClient.QueryAsync(traversal, caller, filePath, sourceLineNumber)).First();
         }
 
         /// <summary>
@@ -297,9 +298,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="traversal">The traversal.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static async Task<Vertex> QueryFirstAsync<S>(this IGraphClient graphClient, ITraversal<S, Gremlin.Net.Structure.Vertex> traversal)
+        public static async Task<Vertex> QueryFirstAsync<S>(this IGraphClient graphClient, ITraversal<S, Gremlin.Net.Structure.Vertex> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return (await graphClient.QueryAsync(traversal)).First();
+            return (await graphClient.QueryAsync(traversal, caller, filePath, sourceLineNumber)).First();
         }
 
         /// <summary>
@@ -311,9 +312,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="traversal">The traversal.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static async Task<Edge> QueryFirstAsync<S>(this IGraphClient graphClient, ITraversal<S, Gremlin.Net.Structure.Edge> traversal)
+        public static async Task<Edge> QueryFirstAsync<S>(this IGraphClient graphClient, ITraversal<S, Gremlin.Net.Structure.Edge> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return (await graphClient.QueryAsync(traversal)).First();
+            return (await graphClient.QueryAsync(traversal, caller, filePath, sourceLineNumber)).First();
         }
 
         /// <summary>
@@ -325,9 +326,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="traversal">The traversal.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static async Task<Property> QueryFirstAsync<S>(this IGraphClient graphClient, ITraversal<S, Gremlin.Net.Structure.Property> traversal)
+        public static async Task<Property> QueryFirstAsync<S>(this IGraphClient graphClient, ITraversal<S, Gremlin.Net.Structure.Property> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return (await graphClient.QueryAsync(traversal)).First();
+            return (await graphClient.QueryAsync(traversal, caller, filePath, sourceLineNumber)).First();
         }
 
         /// <summary>
@@ -340,9 +341,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="serializerSettings">The serializer settings.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static async Task<T> QueryFirstAsync<T>(this IGraphClient graphClient, string gremlinQuery, JsonSerializerSettings serializerSettings)
+        public static async Task<T> QueryFirstAsync<T>(this IGraphClient graphClient, string gremlinQuery, JsonSerializerSettings serializerSettings, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return (await graphClient.QueryAsync<T>(gremlinQuery, serializerSettings)).First();
+            return (await graphClient.QueryAsync<T>(gremlinQuery, serializerSettings, caller, filePath, sourceLineNumber)).First();
         }
 
         /// <summary>
@@ -356,9 +357,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="serializerSettings">The serializer settings.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static async Task<E> QueryFirstAsync<S, E>(this IGraphClient graphClient, ITraversal<S, E> traversal, JsonSerializerSettings serializerSettings)
+        public static async Task<E> QueryFirstAsync<S, E>(this IGraphClient graphClient, ITraversal<S, E> traversal, JsonSerializerSettings serializerSettings, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return (await graphClient.QueryAsync(traversal, serializerSettings)).First();
+            return (await graphClient.QueryAsync(traversal, serializerSettings, caller, filePath, sourceLineNumber)).First();
         }
 
         /// <summary>
@@ -372,9 +373,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="serializerSettings">The serializer settings.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static async Task<E> QueryFirstAsync<S, E>(this IGraphClient graphClient, ISchemaBoundTraversal<S, E> traversal, JsonSerializerSettings serializerSettings)
+        public static async Task<E> QueryFirstAsync<S, E>(this IGraphClient graphClient, ISchemaBoundTraversal<S, E> traversal, JsonSerializerSettings serializerSettings, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return (await graphClient.QueryAsync(traversal, serializerSettings)).First();
+            return (await graphClient.QueryAsync(traversal, serializerSettings, caller, filePath, sourceLineNumber)).First();
         }
 
         /// <summary>
@@ -387,9 +388,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="serializerSettings">The serializer settings.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static async Task<T> QueryFirstAsync<T>(this IGraphClient graphClient, ITraversal traversal, JsonSerializerSettings serializerSettings)
+        public static async Task<T> QueryFirstAsync<T>(this IGraphClient graphClient, ITraversal traversal, JsonSerializerSettings serializerSettings, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return (await graphClient.QueryAsync<T>(traversal, serializerSettings)).First();
+            return (await graphClient.QueryAsync<T>(traversal, serializerSettings, caller, filePath, sourceLineNumber)).First();
         }
 
         #endregion QueryFirstAsync
@@ -405,9 +406,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="gremlinQuery">The traversal query.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static async Task<T> QueryFirstOrDefaultAsync<T>(this IGraphClient graphClient, string gremlinQuery)
+        public static async Task<T> QueryFirstOrDefaultAsync<T>(this IGraphClient graphClient, string gremlinQuery, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return (await graphClient.QueryAsync<T>(gremlinQuery)).FirstOrDefault();
+            return (await graphClient.QueryAsync<T>(gremlinQuery, caller, filePath, sourceLineNumber)).FirstOrDefault();
         }
 
         /// <summary>
@@ -419,9 +420,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="traversal">The traversal.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static async Task<T> QueryFirstOrDefaultAsync<T>(this IGraphClient graphClient, ITraversal traversal)
+        public static async Task<T> QueryFirstOrDefaultAsync<T>(this IGraphClient graphClient, ITraversal traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return (await graphClient.QueryAsync<T>(traversal)).FirstOrDefault();
+            return (await graphClient.QueryAsync<T>(traversal, caller, filePath, sourceLineNumber)).FirstOrDefault();
         }
 
         /// <summary>
@@ -434,9 +435,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="traversal">The traversal.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static async Task<E> QueryFirstOrDefaultAsync<S, E>(this IGraphClient graphClient, ITraversal<S, E> traversal)
+        public static async Task<E> QueryFirstOrDefaultAsync<S, E>(this IGraphClient graphClient, ITraversal<S, E> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return (await graphClient.QueryAsync(traversal)).FirstOrDefault();
+            return (await graphClient.QueryAsync(traversal, caller, filePath, sourceLineNumber)).FirstOrDefault();
         }
 
         /// <summary>
@@ -449,9 +450,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="traversal">The traversal.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static async Task<E> QueryFirstOrDefaultAsync<S, E>(this IGraphClient graphClient, ISchemaBoundTraversal<S, E> traversal)
+        public static async Task<E> QueryFirstOrDefaultAsync<S, E>(this IGraphClient graphClient, ISchemaBoundTraversal<S, E> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return (await graphClient.QueryAsync(traversal)).FirstOrDefault();
+            return (await graphClient.QueryAsync(traversal, caller, filePath, sourceLineNumber)).FirstOrDefault();
         }
 
         /// <summary>
@@ -463,9 +464,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="traversal">The traversal.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static async Task<Vertex> QueryFirstOrDefaultAsync<S>(this IGraphClient graphClient, ITraversal<S, Gremlin.Net.Structure.Vertex> traversal)
+        public static async Task<Vertex> QueryFirstOrDefaultAsync<S>(this IGraphClient graphClient, ITraversal<S, Gremlin.Net.Structure.Vertex> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return (await graphClient.QueryAsync(traversal)).FirstOrDefault();
+            return (await graphClient.QueryAsync(traversal, caller, filePath, sourceLineNumber)).FirstOrDefault();
         }
 
         /// <summary>
@@ -477,9 +478,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="traversal">The traversal.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static async Task<Edge> QueryFirstOrDefaultAsync<S>(this IGraphClient graphClient, ITraversal<S, Gremlin.Net.Structure.Edge> traversal)
+        public static async Task<Edge> QueryFirstOrDefaultAsync<S>(this IGraphClient graphClient, ITraversal<S, Gremlin.Net.Structure.Edge> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return (await graphClient.QueryAsync(traversal)).FirstOrDefault();
+            return (await graphClient.QueryAsync(traversal, caller, filePath, sourceLineNumber)).FirstOrDefault();
         }
 
         /// <summary>
@@ -491,9 +492,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="traversal">The traversal.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static async Task<Property> QueryFirstOrDefaultAsync<S>(this IGraphClient graphClient, ITraversal<S, Gremlin.Net.Structure.Property> traversal)
+        public static async Task<Property> QueryFirstOrDefaultAsync<S>(this IGraphClient graphClient, ITraversal<S, Gremlin.Net.Structure.Property> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return (await graphClient.QueryAsync(traversal)).FirstOrDefault();
+            return (await graphClient.QueryAsync(traversal, caller, filePath, sourceLineNumber)).FirstOrDefault();
         }
 
         /// <summary>
@@ -506,9 +507,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="serializerSettings">The serializer settings.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static async Task<T> QueryFirstOrDefaultAsync<T>(this IGraphClient graphClient, string gremlinQuery, JsonSerializerSettings serializerSettings)
+        public static async Task<T> QueryFirstOrDefaultAsync<T>(this IGraphClient graphClient, string gremlinQuery, JsonSerializerSettings serializerSettings, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return (await graphClient.QueryAsync<T>(gremlinQuery, serializerSettings)).FirstOrDefault();
+            return (await graphClient.QueryAsync<T>(gremlinQuery, serializerSettings, caller, filePath, sourceLineNumber)).FirstOrDefault();
         }
 
         /// <summary>
@@ -522,9 +523,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="serializerSettings">The serializer settings.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static async Task<E> QueryFirstOrDefaultAsync<S, E>(this IGraphClient graphClient, ITraversal<S, E> traversal, JsonSerializerSettings serializerSettings)
+        public static async Task<E> QueryFirstOrDefaultAsync<S, E>(this IGraphClient graphClient, ITraversal<S, E> traversal, JsonSerializerSettings serializerSettings, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return (await graphClient.QueryAsync(traversal, serializerSettings)).FirstOrDefault();
+            return (await graphClient.QueryAsync(traversal, serializerSettings, caller, filePath, sourceLineNumber)).FirstOrDefault();
         }
 
         /// <summary>
@@ -538,9 +539,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="serializerSettings">The serializer settings.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static async Task<E> QueryFirstOrDefaultAsync<S, E>(this IGraphClient graphClient, ISchemaBoundTraversal<S, E> traversal, JsonSerializerSettings serializerSettings)
+        public static async Task<E> QueryFirstOrDefaultAsync<S, E>(this IGraphClient graphClient, ISchemaBoundTraversal<S, E> traversal, JsonSerializerSettings serializerSettings, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return (await graphClient.QueryAsync(traversal, serializerSettings)).FirstOrDefault();
+            return (await graphClient.QueryAsync(traversal, serializerSettings, caller, filePath, sourceLineNumber)).FirstOrDefault();
         }
 
         /// <summary>
@@ -553,9 +554,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="serializerSettings">The serializer settings.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static async Task<T> QueryFirstOrDefaultAsync<T>(this IGraphClient graphClient, ITraversal traversal, JsonSerializerSettings serializerSettings)
+        public static async Task<T> QueryFirstOrDefaultAsync<T>(this IGraphClient graphClient, ITraversal traversal, JsonSerializerSettings serializerSettings, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return (await graphClient.QueryAsync<T>(traversal, serializerSettings)).FirstOrDefault();
+            return (await graphClient.QueryAsync<T>(traversal, serializerSettings, caller, filePath, sourceLineNumber)).FirstOrDefault();
         }
 
         #endregion QueryFirstOrDefaultAsync
@@ -570,9 +571,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="gremlinQuery">The traversal query.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static async Task<T> QuerySingleAsync<T>(this IGraphClient graphClient, string gremlinQuery)
+        public static async Task<T> QuerySingleAsync<T>(this IGraphClient graphClient, string gremlinQuery, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return (await graphClient.QueryAsync<T>(gremlinQuery)).Single();
+            return (await graphClient.QueryAsync<T>(gremlinQuery, caller, filePath, sourceLineNumber)).Single();
         }
 
         /// <summary>
@@ -584,9 +585,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="traversal">The traversal.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static async Task<T> QuerySingleAsync<T>(this IGraphClient graphClient, ITraversal traversal)
+        public static async Task<T> QuerySingleAsync<T>(this IGraphClient graphClient, ITraversal traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return (await graphClient.QueryAsync<T>(traversal)).Single();
+            return (await graphClient.QueryAsync<T>(traversal, caller, filePath, sourceLineNumber)).Single();
         }
 
         /// <summary>
@@ -599,9 +600,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="traversal">The traversal.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static async Task<E> QuerySingleAsync<S, E>(this IGraphClient graphClient, ITraversal<S, E> traversal)
+        public static async Task<E> QuerySingleAsync<S, E>(this IGraphClient graphClient, ITraversal<S, E> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return (await graphClient.QueryAsync(traversal)).Single();
+            return (await graphClient.QueryAsync(traversal, caller, filePath, sourceLineNumber)).Single();
         }
 
         /// <summary>
@@ -614,9 +615,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="traversal">The traversal.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static async Task<E> QuerySingleAsync<S, E>(this IGraphClient graphClient, ISchemaBoundTraversal<S, E> traversal)
+        public static async Task<E> QuerySingleAsync<S, E>(this IGraphClient graphClient, ISchemaBoundTraversal<S, E> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return (await graphClient.QueryAsync(traversal)).Single();
+            return (await graphClient.QueryAsync(traversal, caller, filePath, sourceLineNumber)).Single();
         }
 
         /// <summary>
@@ -628,9 +629,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="traversal">The traversal.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static async Task<Vertex> QuerySingleAsync<S>(this IGraphClient graphClient, ITraversal<S, Gremlin.Net.Structure.Vertex> traversal)
+        public static async Task<Vertex> QuerySingleAsync<S>(this IGraphClient graphClient, ITraversal<S, Gremlin.Net.Structure.Vertex> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return (await graphClient.QueryAsync(traversal)).Single();
+            return (await graphClient.QueryAsync(traversal, caller, filePath, sourceLineNumber)).Single();
         }
 
         /// <summary>
@@ -642,9 +643,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="traversal">The traversal.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static async Task<Edge> QuerySingleAsync<S>(this IGraphClient graphClient, ITraversal<S, Gremlin.Net.Structure.Edge> traversal)
+        public static async Task<Edge> QuerySingleAsync<S>(this IGraphClient graphClient, ITraversal<S, Gremlin.Net.Structure.Edge> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return (await graphClient.QueryAsync(traversal)).Single();
+            return (await graphClient.QueryAsync(traversal, caller, filePath, sourceLineNumber)).Single();
         }
 
         /// <summary>
@@ -656,9 +657,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="traversal">The traversal.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static async Task<Property> QuerySingleAsync<S>(this IGraphClient graphClient, ITraversal<S, Gremlin.Net.Structure.Property> traversal)
+        public static async Task<Property> QuerySingleAsync<S>(this IGraphClient graphClient, ITraversal<S, Gremlin.Net.Structure.Property> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return (await graphClient.QueryAsync(traversal)).Single();
+            return (await graphClient.QueryAsync(traversal, caller, filePath, sourceLineNumber)).Single();
         }
 
         /// <summary>
@@ -671,9 +672,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="serializerSettings">The serializer settings.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static async Task<T> QuerySingleAsync<T>(this IGraphClient graphClient, string gremlinQuery, JsonSerializerSettings serializerSettings)
+        public static async Task<T> QuerySingleAsync<T>(this IGraphClient graphClient, string gremlinQuery, JsonSerializerSettings serializerSettings, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return (await graphClient.QueryAsync<T>(gremlinQuery, serializerSettings)).Single();
+            return (await graphClient.QueryAsync<T>(gremlinQuery, serializerSettings, caller, filePath, sourceLineNumber)).Single();
         }
 
         /// <summary>
@@ -687,9 +688,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="serializerSettings">The serializer settings.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static async Task<E> QuerySingleAsync<S, E>(this IGraphClient graphClient, ITraversal<S, E> traversal, JsonSerializerSettings serializerSettings)
+        public static async Task<E> QuerySingleAsync<S, E>(this IGraphClient graphClient, ITraversal<S, E> traversal, JsonSerializerSettings serializerSettings, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return (await graphClient.QueryAsync(traversal, serializerSettings)).Single();
+            return (await graphClient.QueryAsync(traversal, serializerSettings, caller, filePath, sourceLineNumber)).Single();
         }
 
         /// <summary>
@@ -703,9 +704,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="serializerSettings">The serializer settings.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static async Task<E> QuerySingleAsync<S, E>(this IGraphClient graphClient, ISchemaBoundTraversal<S, E> traversal, JsonSerializerSettings serializerSettings)
+        public static async Task<E> QuerySingleAsync<S, E>(this IGraphClient graphClient, ISchemaBoundTraversal<S, E> traversal, JsonSerializerSettings serializerSettings, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return (await graphClient.QueryAsync(traversal, serializerSettings)).Single();
+            return (await graphClient.QueryAsync(traversal, serializerSettings, caller, filePath, sourceLineNumber)).Single();
         }
 
         /// <summary>
@@ -718,9 +719,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="serializerSettings">The serializer settings.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static async Task<T> QuerySingleAsync<T>(this IGraphClient graphClient, ITraversal traversal, JsonSerializerSettings serializerSettings)
+        public static async Task<T> QuerySingleAsync<T>(this IGraphClient graphClient, ITraversal traversal, JsonSerializerSettings serializerSettings, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return (await graphClient.QueryAsync<T>(traversal, serializerSettings)).Single();
+            return (await graphClient.QueryAsync<T>(traversal, serializerSettings, caller, filePath, sourceLineNumber)).Single();
         }
 
         #endregion QuerySingleAsync
@@ -736,9 +737,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="gremlinQuery">The traversal query.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static async Task<T> QuerySingleOrDefaultAsync<T>(this IGraphClient graphClient, string gremlinQuery)
+        public static async Task<T> QuerySingleOrDefaultAsync<T>(this IGraphClient graphClient, string gremlinQuery, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return (await graphClient.QueryAsync<T>(gremlinQuery)).SingleOrDefault();
+            return (await graphClient.QueryAsync<T>(gremlinQuery, caller, filePath, sourceLineNumber)).SingleOrDefault();
         }
 
         /// <summary>
@@ -750,9 +751,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="traversal">The traversal.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static async Task<T> QuerySingleOrDefaultAsync<T>(this IGraphClient graphClient, ITraversal traversal)
+        public static async Task<T> QuerySingleOrDefaultAsync<T>(this IGraphClient graphClient, ITraversal traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return (await graphClient.QueryAsync<T>(traversal)).SingleOrDefault();
+            return (await graphClient.QueryAsync<T>(traversal, caller, filePath, sourceLineNumber)).SingleOrDefault();
         }
 
         /// <summary>
@@ -765,9 +766,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="traversal">The traversal.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static async Task<E> QuerySingleOrDefaultAsync<S, E>(this IGraphClient graphClient, ITraversal<S, E> traversal)
+        public static async Task<E> QuerySingleOrDefaultAsync<S, E>(this IGraphClient graphClient, ITraversal<S, E> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return (await graphClient.QueryAsync(traversal)).SingleOrDefault();
+            return (await graphClient.QueryAsync(traversal, caller, filePath, sourceLineNumber)).SingleOrDefault();
         }
 
         /// <summary>
@@ -780,9 +781,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="traversal">The traversal.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static async Task<E> QuerySingleOrDefaultAsync<S, E>(this IGraphClient graphClient, ISchemaBoundTraversal<S, E> traversal)
+        public static async Task<E> QuerySingleOrDefaultAsync<S, E>(this IGraphClient graphClient, ISchemaBoundTraversal<S, E> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return (await graphClient.QueryAsync(traversal)).SingleOrDefault();
+            return (await graphClient.QueryAsync(traversal, caller, filePath, sourceLineNumber)).SingleOrDefault();
         }
 
         /// <summary>
@@ -794,9 +795,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="traversal">The traversal.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static async Task<Vertex> QuerySingleOrDefaultAsync<S>(this IGraphClient graphClient, ITraversal<S, Gremlin.Net.Structure.Vertex> traversal)
+        public static async Task<Vertex> QuerySingleOrDefaultAsync<S>(this IGraphClient graphClient, ITraversal<S, Gremlin.Net.Structure.Vertex> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return (await graphClient.QueryAsync(traversal)).SingleOrDefault();
+            return (await graphClient.QueryAsync(traversal, caller, filePath, sourceLineNumber)).SingleOrDefault();
         }
 
         /// <summary>
@@ -808,9 +809,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="traversal">The traversal.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static async Task<Edge> QuerySingleOrDefaultAsync<S>(this IGraphClient graphClient, ITraversal<S, Gremlin.Net.Structure.Edge> traversal)
+        public static async Task<Edge> QuerySingleOrDefaultAsync<S>(this IGraphClient graphClient, ITraversal<S, Gremlin.Net.Structure.Edge> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return (await graphClient.QueryAsync(traversal)).SingleOrDefault();
+            return (await graphClient.QueryAsync(traversal, caller, filePath, sourceLineNumber)).SingleOrDefault();
         }
 
         /// <summary>
@@ -822,9 +823,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="traversal">The traversal.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static async Task<Property> QuerySingleOrDefaultAsync<S>(this IGraphClient graphClient, ITraversal<S, Gremlin.Net.Structure.Property> traversal)
+        public static async Task<Property> QuerySingleOrDefaultAsync<S>(this IGraphClient graphClient, ITraversal<S, Gremlin.Net.Structure.Property> traversal, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return (await graphClient.QueryAsync(traversal)).SingleOrDefault();
+            return (await graphClient.QueryAsync(traversal, caller, filePath, sourceLineNumber)).SingleOrDefault();
         }
 
         /// <summary>
@@ -837,9 +838,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="serializerSettings">The serializer settings.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static async Task<T> QuerySingleOrDefaultAsync<T>(this IGraphClient graphClient, string gremlinQuery, JsonSerializerSettings serializerSettings)
+        public static async Task<T> QuerySingleOrDefaultAsync<T>(this IGraphClient graphClient, string gremlinQuery, JsonSerializerSettings serializerSettings, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return (await graphClient.QueryAsync<T>(gremlinQuery, serializerSettings)).SingleOrDefault();
+            return (await graphClient.QueryAsync<T>(gremlinQuery, serializerSettings, caller, filePath, sourceLineNumber)).SingleOrDefault();
         }
 
         /// <summary>
@@ -853,9 +854,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="serializerSettings">The serializer settings.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static async Task<E> QuerySingleOrDefaultAsync<S, E>(this IGraphClient graphClient, ITraversal<S, E> traversal, JsonSerializerSettings serializerSettings)
+        public static async Task<E> QuerySingleOrDefaultAsync<S, E>(this IGraphClient graphClient, ITraversal<S, E> traversal, JsonSerializerSettings serializerSettings, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return (await graphClient.QueryAsync(traversal, serializerSettings)).SingleOrDefault();
+            return (await graphClient.QueryAsync(traversal, serializerSettings, caller, filePath, sourceLineNumber)).SingleOrDefault();
         }
 
         /// <summary>
@@ -869,9 +870,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="serializerSettings">The serializer settings.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static async Task<E> QuerySingleOrDefaultAsync<S, E>(this IGraphClient graphClient, ISchemaBoundTraversal<S, E> traversal, JsonSerializerSettings serializerSettings)
+        public static async Task<E> QuerySingleOrDefaultAsync<S, E>(this IGraphClient graphClient, ISchemaBoundTraversal<S, E> traversal, JsonSerializerSettings serializerSettings, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return (await graphClient.QueryAsync(traversal, serializerSettings)).SingleOrDefault();
+            return (await graphClient.QueryAsync(traversal, serializerSettings, caller, filePath, sourceLineNumber)).SingleOrDefault();
         }
 
         /// <summary>
@@ -884,9 +885,9 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="serializerSettings">The serializer settings.</param>
         /// <returns>Returns the result</returns>
         /// <exception cref="ArgumentNullException">traversal</exception>
-        public static async Task<T> QuerySingleOrDefaultAsync<T>(this IGraphClient graphClient, ITraversal traversal, JsonSerializerSettings serializerSettings)
+        public static async Task<T> QuerySingleOrDefaultAsync<T>(this IGraphClient graphClient, ITraversal traversal, JsonSerializerSettings serializerSettings, [CallerMemberName] string caller = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            return (await graphClient.QueryAsync<T>(traversal, serializerSettings)).SingleOrDefault();
+            return (await graphClient.QueryAsync<T>(traversal, serializerSettings, caller, filePath, sourceLineNumber)).SingleOrDefault();
         }
 
         #endregion QuerySingleOrDefaultAsync

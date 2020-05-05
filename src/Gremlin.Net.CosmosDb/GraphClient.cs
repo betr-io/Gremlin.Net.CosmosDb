@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Gremlin.Net.CosmosDb.Serialization;
 using Gremlin.Net.CosmosDb.Structure;
@@ -66,7 +67,11 @@ namespace Gremlin.Net.CosmosDb
         /// <param name="gremlinQuery">The gremlin query.</param>
         /// <returns>Returns the results</returns>
         /// <exception cref="ArgumentNullException">gremlinQuery</exception>
-        public async Task<GraphResult> QueryAsync(string gremlinQuery)
+        public async Task<GraphResult> QueryAsync(
+            string gremlinQuery,
+            [CallerMemberName] string caller = "",
+            [CallerFilePath] string filePath = "",
+            [CallerLineNumber] int sourceLineNumber = 0)
         {
             if (gremlinQuery == null)
                 throw new ArgumentNullException(nameof(gremlinQuery));
