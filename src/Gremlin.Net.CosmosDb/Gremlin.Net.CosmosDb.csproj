@@ -10,6 +10,7 @@
     <Copyright>© 2001-2019 evo - All rights reserved, all wrongs reversed</Copyright>
     <PackageProjectUrl>https://github.com/evo-terren/Gremlin.Net.CosmosDb</PackageProjectUrl>
     <RepositoryUrl>https://github.com/evo-terren/Gremlin.Net.CosmosDb</RepositoryUrl>
+    <AssemblyName>Betr.Gremlin.Net.CosmosDb</AssemblyName>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -22,14 +23,14 @@
     <DelaySign>false</DelaySign>
     <AssemblyOriginatorKeyFile>gremlincosmos.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
-  
+
   <PropertyGroup Condition="'$(TargetFramework)'=='netcoreapp2.0'">
     <DefineConstants>NET_CORE</DefineConstants>
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>bin\Release\netstandard2.0\Gremlin.Net.CosmosDb.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\netstandard2.0\$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

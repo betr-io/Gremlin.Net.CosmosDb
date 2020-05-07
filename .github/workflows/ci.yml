@@ -62,7 +62,7 @@ jobs:
 
       - name: Pack NuGet packages
         if: startsWith(github.ref, 'refs/tags/')
-        run: dotnet pack --configuration Release -p:Company=Betr -p:PackageId=Betr.Gremlin.Net.CosmosDb -p:PackageProjectUrl=${{ github.event.repository.html_url }} -p:RepositoryUrl=${{ github.event.repository.html_url }}
+        run: dotnet pack --configuration Release -p:Company=Betr -p:PackageProjectUrl=${{ github.event.repository.html_url }} -p:RepositoryUrl=${{ github.event.repository.html_url }}
         working-directory: ./src/Gremlin.Net.CosmosDb
 
       - name: Create Release
