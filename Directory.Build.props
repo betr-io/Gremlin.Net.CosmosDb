@@ -14,4 +14,9 @@
     <VersionPrefix Condition=" '$(VersionPrefix)' == '' ">0.1.0</VersionPrefix>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <AssemblyNamePrefix>Betr</AssemblyNamePrefix>
+    <AssemblyName Condition=" '$(AssemblyNamePrefix)' != '' ">$(AssemblyNamePrefix).$(MSBuildProjectName)</AssemblyName>
+  </PropertyGroup>
+
 </Project>
