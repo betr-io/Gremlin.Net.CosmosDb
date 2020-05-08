@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Gremlin.Net.CosmosDb.Serialization;
 using Gremlin.Net.CosmosDb.Structure;
 using Gremlin.Net.Driver;
+using Gremlin.Net.Structure.IO.GraphSON;
 using Newtonsoft.Json.Linq;
 
 namespace Gremlin.Net.CosmosDb
@@ -33,7 +34,7 @@ namespace Gremlin.Net.CosmosDb
         {
             var server = new GremlinServer(gremlinHostname, port, useSSL, $"/dbs/{databaseName}/colls/{graphName}", accessKey);
 
-            _gremlinClient = new GremlinClient(server, new GraphSONJTokenReader(), mimeType: GremlinClient.GraphSON2MimeType);
+            _gremlinClient = new GremlinClient(server, new GraphSONJTokenReader(), new GraphSON2Writer(), GremlinClient.GraphSON2MimeType);
         }
 
         /// <summary>

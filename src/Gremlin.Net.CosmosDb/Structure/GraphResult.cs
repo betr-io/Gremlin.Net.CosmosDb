@@ -98,7 +98,7 @@ namespace Gremlin.Net.CosmosDb.Structure
                 throw new System.ArgumentNullException(nameof(resultSet));
             }
 
-            Result = resultSet.Select(token => token.ToObject<T>(serializer)).ToList();
+            Result = resultSet.Cast<JArray>().SelectMany(a => a).Select(token => token.ToObject<T>(serializer)).ToList();
         }
 
         /// <summary>

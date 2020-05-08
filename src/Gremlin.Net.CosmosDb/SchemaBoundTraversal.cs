@@ -1,4 +1,5 @@
-﻿using Gremlin.Net.Process.Traversal;
+﻿using System;
+using Gremlin.Net.Process.Traversal;
 using System.Collections.Generic;
 
 namespace Gremlin.Net.CosmosDb
@@ -26,6 +27,7 @@ namespace Gremlin.Net.CosmosDb
         /// <summary>
         /// Gets or sets the <see cref="ITraversalSideEffects"/> of this traversal.
         /// </summary>
+        [Obsolete("As of release 3.3.8, not replaced, prefer use of cap()-step to retrieve side-effects as part of traversal iteration", false)]
         public ITraversalSideEffects SideEffects
         {
             get { return _traversal.SideEffects; }
